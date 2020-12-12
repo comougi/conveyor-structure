@@ -29,10 +29,13 @@ public class Detail implements Comparable<Detail> {
 
     @Override
     public int compareTo(Detail o) {
+        if (!this.isBroken && o.isBroken) return 1;
+        if (!this.isBroken && this.size > o.size) return 1;
+        if (this.isBroken && !o.isBroken) return -1;
         if (this.isBroken && this.size < o.size) return -1;
-        if (o.isBroken) return 1;
-        if (this.size > o.size) return -1;
-        if (!this.isBroken && this.size < o.size) return -1;
+
+
         return 0;
     }
+
 }
