@@ -1,36 +1,36 @@
 package com.og;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 
 public class Factory {
 
-    public void addDetailsToManufactureConveyor(ArrayList<Detail> details) {
+    public void addDetailsToManufactureConveyor(DoublyLinkedList<Detail> details) {
 
-        details.add(new Detail("motor", 10));
-        details.add(new Detail("wheel", 2));
-        details.add(new Detail("gear", 5));
-        details.add(new Detail("switcher", 1));
-        details.add(new Detail("stick", 3));
-        details.add(new Detail("bumper", 6));
-        details.add(new Detail("fender", 3));
-        details.add(new Detail("tube", 2));
-        details.add(new Detail("butterfly door", 4));
+        details.addElement(new Detail("motor", 10));
+        details.addElement(new Detail("wheel", 2));
+        details.addElement(new Detail("gear", 5));
+        details.addElement(new Detail("switcher", 1));
+        details.addElement(new Detail("stick", 3));
+        details.addElement(new Detail("bumper", 6));
+        details.addElement(new Detail("fender", 3));
+        details.addElement(new Detail("tube", 2));
+        details.addElement(new Detail("butterfly door", 4));
 
     }
 
-    public void manufacture(ArrayList<Detail> details) {
-        for (int i = 0; i < details.size(); i++) {
-            if (i % 3 == 0) {
-                details.get(i).setBroken(true);
-            } else {
-                details.get(i).setBroken(false);
-            }
+    public void manufacture(DoublyLinkedList<Detail> details) {
+        for (int i = 0; i < details.getSize(); i++) {
+            details.getElement(i).setBroken(i % 3 == 0);
 
         }
     }
 
-    public void addToOutputConveyor(ArrayList<Detail> details) {
-        details.sort(new ConveyorComparator());
+    public void addToOutputConveyor(DoublyLinkedList<Detail> details) {
+        details.sort(new ConveyorComparator()); //??
+
     }
 
 
