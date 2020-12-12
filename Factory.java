@@ -1,10 +1,5 @@
 package com.og;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-
 public class Factory {
 
     public void addDetailsToManufactureConveyor(DoublyLinkedList<Detail> details) {
@@ -23,15 +18,19 @@ public class Factory {
 
     public void manufacture(DoublyLinkedList<Detail> details) {
         for (int i = 0; i < details.getSize(); i++) {
-            details.getElement(i).setBroken(i % 3 == 0);
-
+            details.getNode(i).getElement().setBroken(i % 3 == 0);
         }
     }
 
     public void addToOutputConveyor(DoublyLinkedList<Detail> details) {
-        details.sort(new ConveyorComparator()); //??
+        for (MyIterator it = details.getIterator(details); it.hasNext(); ) {
 
+            Detail detail = it.next();
+            if (detail.isBroken()) {
+                it.remove();
+            } else {
+                System.out.println(detail);
+            }
+        }
     }
-
-
 }

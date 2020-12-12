@@ -9,6 +9,5 @@ public class Main {
         factory.addDetailsToManufactureConveyor(details);
         factory.manufacture(details);
         factory.addToOutputConveyor(details);
-        System.out.println(details);
     }
 }

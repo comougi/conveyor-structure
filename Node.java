@@ -1,35 +1,35 @@
 package com.og;
 
 public class Node<T> {
-    private Node<T> previous;
-    private Node<T> next;
-    private T element;
+    private Node<Detail> previous;
+    private Node<Detail> next;
+    private Detail element;
 
-    public Node(T element) {
+    public Node(Detail element) {
         this.element = element;
     }
 
-    public Node<T> getPrevious() {
+    public Node<Detail> getPrevious() {
         return previous;
     }
 
-    public void setPrevious(Node<T> previous) {
+    public void setPrevious(Node<Detail> previous) {
         this.previous = previous;
     }
 
-    public Node<T> getNext() {
+    public Node<Detail> getNext() {
         return next;
     }
 
-    public void setNext(Node<T> next) {
+    public void setNext(Node<Detail> next) {
         this.next = next;
     }
 
-    public T getElement() {
+    public Detail getElement() {
         return element;
     }
 
-    public void setElement(T element) {
+    public void setElement(Detail element) {
         this.element = element;
     }
 }

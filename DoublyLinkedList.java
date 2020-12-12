@@ -1,15 +1,19 @@
 package com.og;
 
 public class DoublyLinkedList<T> {
-    private Node<T> head;
-    private Node<T> last;
+    private Node<Detail> head;
+    private Node<Detail> last;
     private int size;
 
     public DoublyLinkedList() {
     }
 
-    public void addElement(T element) {
-        Node<T> node = new Node<T>(element);
+    public MyIterator getIterator(DoublyLinkedList<Detail> details) {
+        return new MyIterator(details);
+    }
+
+    public void addElement(Detail element) {
+        Node<Detail> node = new Node<Detail>(element);
         if (size == 0) {
             head = node;
         } else {
@@ -22,8 +26,8 @@ public class DoublyLinkedList<T> {
     }
 
 
-    public Node<T> getNode(int index) {
-        Node<T> current = null;
+    public Node<Detail> getNode(int index) {
+        Node<Detail> current = null;
         if (index >= 0 || index < size) {
             current = head;
             int k = 0;
@@ -35,20 +39,20 @@ public class DoublyLinkedList<T> {
         return current;
     }
 
-    public T getElement(int index) {
+    private Detail getElement(int index) {
         return getNode(index).getElement();
     }
 
 
-    public void insertBefore(T element, int index) {
+    public void insertBefore(Detail element, int index) {
 
-        Node<T> node = null;
+        Node<Detail> node = null;
 
         if (index == size) {
             addElement(element);
             return;
         }
-        node = new Node<T>(element);
+        node = new Node<Detail>(element);
 
         if (index == 0) {
             node.setNext(head);
@@ -58,7 +62,7 @@ public class DoublyLinkedList<T> {
             return;
         }
 
-        Node<T> current = getNode(index);
+        Node<Detail> current = getNode(index);
 
         current.getPrevious().setNext(node);
         node.setPrevious(current.getPrevious());
@@ -70,7 +74,7 @@ public class DoublyLinkedList<T> {
     }
 
     public void removeAtIndex(int index) {
-        Node<T> node = getNode(index);
+        Node<Detail> node = getNode(index);
 
         if (head == node) {
             if (head.getNext() != null) {
@@ -93,13 +97,13 @@ public class DoublyLinkedList<T> {
         size--;
     }
 
-    private void setElement(T val, int index) {
+    private void setElement(Detail val, int index) {
         getNode(index).setElement(val);
     }
 
     @Override
     public String toString() {
-        Node<T> current = head;
+        Node<Detail> current = head;
         StringBuilder s = new StringBuilder();
         while (current != null) {
             s.append(current.getElement().toString()).append(", ");
@@ -109,16 +113,15 @@ public class DoublyLinkedList<T> {
         return String.format("TwoWayList: { count = %d , elements ={ %s }}", size, s.toString());
     }
 
-    public Node<T> getHead() {
+    public Node<Detail> getHead() {
         return head;
     }
 
-    public Node<T> getLast() {
+    public Node<Detail> getLast() {
         return last;
     }
 
     public int getSize() {
         return size;
     }
-
 }

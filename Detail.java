@@ -1,14 +1,38 @@
 package com.og;
 
 public class Detail implements Comparable<Detail> {
-    private final String title;
-    private final int size;
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public boolean isBroken() {
+        return isBroken;
+    }
+
+    private int size;
     private boolean isBroken = false;
 
     public Detail(String title, int size, boolean isBroken) {
         this.title = title;
         this.size = size;
         this.isBroken = isBroken;
+    }
+
+    public Detail() {
     }
 
     public Detail(String title, int size) {
