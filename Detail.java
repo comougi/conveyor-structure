@@ -3,12 +3,21 @@ package com.og;
 public class Detail implements Comparable<Detail> {
     private final String title;
     private final int size;
-    private final boolean isBroken;
+    private boolean isBroken = false;
 
     public Detail(String title, int size, boolean isBroken) {
         this.title = title;
         this.size = size;
         this.isBroken = isBroken;
+    }
+
+    public Detail(String title, int size) {
+        this.title = title;
+        this.size = size;
+    }
+
+    public void setBroken(boolean broken) {
+        isBroken = broken;
     }
 
     @Override
@@ -23,7 +32,7 @@ public class Detail implements Comparable<Detail> {
         if (this.isBroken && this.size < o.size) return -1;
         if (o.isBroken) return 1;
         if (this.size > o.size) return -1;
-        if(!this.isBroken &&this.size<o.size) return -1;
+        if (!this.isBroken && this.size < o.size) return -1;
         return 0;
     }
 }
