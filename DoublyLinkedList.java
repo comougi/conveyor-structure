@@ -8,9 +8,6 @@ public class DoublyLinkedList<T> {
     public DoublyLinkedList() {
     }
 
-    public MyIterator getIterator(DoublyLinkedList<Detail> details) {
-        return new MyIterator(details);
-    }
 
     public void addElement(Detail element) {
         Node<Detail> node = new Node<Detail>(element);
@@ -91,6 +88,7 @@ public class DoublyLinkedList<T> {
                 last = null;
             }
         } else {
+
             node.getPrevious().setNext(node.getNext());
             node.getNext().setPrevious(node.getPrevious());
         }
@@ -110,7 +108,7 @@ public class DoublyLinkedList<T> {
             current = current.getNext();
         }
 
-        return String.format("TwoWayList: { count = %d , elements ={ %s }}", size, s.toString());
+        return String.format("Количество деталей: %d , Детали:\n%s", size, s.toString());
     }
 
     public Node<Detail> getHead() {

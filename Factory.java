@@ -1,36 +1,59 @@
 package com.og;
 
-public class Factory {
+import java.util.Iterator;
+import java.util.Random;
 
-    public void addDetailsToManufactureConveyor(DoublyLinkedList<Detail> details) {
+public class Factory implements Iterable<Detail> {
+    private final String name;
+    private final int rating;
+    DoublyLinkedList<Detail> details;
+    int i=0;
 
-        details.addElement(new Detail("motor", 10));
-        details.addElement(new Detail("wheel", 2));
-        details.addElement(new Detail("gear", 5));
-        details.addElement(new Detail("switcher", 1));
-        details.addElement(new Detail("stick", 3));
-        details.addElement(new Detail("bumper", 6));
-        details.addElement(new Detail("fender", 3));
-        details.addElement(new Detail("tube", 2));
-        details.addElement(new Detail("butterfly door", 4));
-
+    public Factory(String name, int rating) {
+        this.name = name;
+        this.rating = rating;
+        details=new DoublyLinkedList<Detail>();
     }
 
-    public void manufacture(DoublyLinkedList<Detail> details) {
-        for (int i = 0; i < details.getSize(); i++) {
-            details.getNode(i).getElement().setBroken(i % 3 == 0);
+    public void addDetailToQueue(Detail detail) {
+        detail.setIndex(detail.getIndex()+i);
+        details.addElement(detail);
+        i++;
+        System.out.printf("Деталь %s с размером %d отправлена на производство%n", detail.getTitle(), detail.getSize());
+    }
+
+    public void checkAfterManufacture(Detail detail) {
+        Random random=new Random();
+        detail.setBroken(random.nextBoolean());
+
+        System.out.printf("Деталь %s с размером %d изготовлена. Поломка - %s\n", detail.getTitle(), detail.getSize(), detail.isBroken());
+        if(detail.isBroken()){
+            details.removeAtIndex(detail.getIndex());
+            i--;
         }
     }
 
-    public void addToOutputConveyor(DoublyLinkedList<Detail> details) {
-        for (MyIterator it = details.getIterator(details); it.hasNext(); ) {
 
-            Detail detail = it.next();
-            if (detail.isBroken()) {
-                it.remove();
-            } else {
-                System.out.println(detail);
+
+
+    @Override
+    public Iterator<Detail> iterator() {
+        DoublyLinkedList<Detail> list = details;
+        final int[] i = {-1};
+        return new Iterator<Detail>() {
+            @Override
+            public boolean hasNext() {
+                return list.getNode(i[0]).getNext() != null;
             }
-        }
+
+            @Override
+            public Detail next() {
+                Detail element = list.getNode(i[0]).getNext().getElement();
+                i[0]++;
+                return element;
+            }
+        };
     }
+
+
 }
